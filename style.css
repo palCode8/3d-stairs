@@ -1,0 +1,119 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial;
+}
+html, body {
+  width: 100%;
+  height: 100%;
+}
+:root {
+  --color1: #eac4ff;
+  --color2: #9e57c5;
+  --color3: #ae52dd;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(var(--color1), var(--color2));
+  overflow: hidden;
+}
+
+.stairs {
+  width: 500px;
+  height: 300px;
+  /* background-image: linear-gradient(to right, rgb(0, 0, 0),orange,yellow,green,blue,indigo,rgb(0, 0, 0)); */
+  position: relative;
+  transform: rotateX(-30deg) rotateY(160deg);
+  transform-style: preserve-3d;
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateX(-30deg) rotateY(0deg);
+  }
+  100% {
+    transform: rotateX(-30deg) rotateY(360deg);
+  }
+}
+
+.stairs .base {
+  width: 360px;
+  height: 300px;
+  background-color: var(--color2);
+  position: absolute;
+  top: 0;
+  left: 60px;
+  transform: rotateX(90deg) translateZ(-150px) scale(1.25);
+  filter: blur(20px);
+  opacity: 0.5;
+}
+
+.stairs .step {
+  width: 60px;
+  height: calc(60px * var(--j));
+  position: absolute;
+  bottom: 0;
+  left: calc(60px * var(--j));
+  transform-style: preserve-3d;
+}
+
+.stairs .step::after {
+  content: '';
+  height: 60px;
+  width: 300px;
+  background-color: var(--color2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotateY(90deg) translateZ(-150px);
+}
+
+.stairs .step::before {
+  content: '';
+  height: 300px;
+  width: 60px;
+  background-color: var(--color3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotateX(90deg) translateZ(150px);
+}
+
+.stairs .step:hover::before {
+  filter: brightness(1.1);
+  cursor: pointer;
+}
+
+.stairs .step i {
+  width: 60px;
+  height: 100%;
+  background-color: var(--color2);
+  display: block;
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.stairs .step i:nth-child(1) {
+  transform: translateZ(150px);
+}
+.stairs .step i:nth-child(2) {
+  transform: translateZ(-150px);
+}
+
+.stairs .step:last-child i:nth-child(2)::before {
+  content: '';
+  width: 300px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--color2);
+  transform: rotateY(90deg) translate3d(-150px, 0, -90px);
+}
+
